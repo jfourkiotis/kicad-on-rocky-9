@@ -1,5 +1,7 @@
 # KiCad Portable (Rocky Linux 9)
 
+[![build-kicad-portable](https://github.com/jfourkiotis/kicad-on-rocky-9/actions/workflows/build.yml/badge.svg)](https://github.com/jfourkiotis/kicad-on-rocky-9/actions/workflows/build.yml)
+
 This repo builds a **relocatable** KiCad 9.0.7 bundle inside a Rocky Linux 9 Docker container and outputs a tarball:
 
 ```
