@@ -64,3 +64,7 @@ Save as `kicad.csh`, `chmod +x kicad.csh`, then run `./kicad.csh`.
 
 A workflow is included to build and attach the tarball to a GitHub Release when you push a tag like `v9.0.7`.
 
+## AI Usage
+Have in mind that AI agents were used partially in this project. Somethings may not be optimized, maybe even 
+completely wrong. 
+
