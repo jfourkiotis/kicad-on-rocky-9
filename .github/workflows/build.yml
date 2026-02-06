@@ -16,6 +16,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Download KiCad source (9.0.7)
+        run: |
+          if [ ! -d "kicad-9.0.7/kicad-9.0.7" ]; then
+            mkdir -p kicad-9.0.7
+            git clone --branch 9.0.7 --depth 1 https://gitlab.com/kicad/code/kicad.git kicad-9.0.7/kicad-9.0.7
+          fi
+
       - name: Build Docker image
         run: docker build -t kicad-rocky9 .
 
