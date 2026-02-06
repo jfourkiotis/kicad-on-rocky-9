@@ -1,0 +1,37 @@
+name: build-kicad-portable
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t kicad-rocky9 .
+
+      - name: Build KiCad tarball
+        run: |
+          docker volume create kicad_deps
+          docker run --rm \
+            -e PREFIX=/opt/kicad-portable \
+            -v "${{ github.workspace }}:/work" \
+            -v "${{ github.workspace }}/kicad-9.0.7/kicad-9.0.7:/src" \
+            -v "${{ github.workspace }}/out:/out" \
+            -v kicad_deps:/opt/deps \
+            kicad-rocky9 bash -lc "chmod +x /work/build.sh && /work/build.sh && tar -C /opt -czf /out/kicad-portable-rocky9.tar.gz kicad-portable"
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: out/kicad-portable-rocky9.tar.gz
