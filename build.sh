@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PREFIX="${PREFIX:-/mnt/MYDATA/downloads/kicad-portable}"
+PREFIX="${PREFIX:-/opt/kicad-portable}"
 DEPS_PREFIX="${DEPS_PREFIX:-/opt/deps}"
 JOBS="${JOBS:-$(nproc)}"
 export CC="ccache gcc"
