@@ -19,7 +19,7 @@ The tarball can be extracted anywhere (for example under a user's home directory
 
 From the repo root:
 
-```
+```ps
 docker build -t kicad-rocky9 .
 
 docker run --name kicad-build -e PREFIX=/opt/kicad-portable ^
@@ -36,16 +36,16 @@ When it finishes, the tarball will be in `out/`.
 
 Extract anywhere, e.g.:
 
-```
+```sh
 mkdir -p ~/apps
 cd ~/apps
 
 tar -xf kicad-portable-rocky9.tar.gz
 ```
 
-If your system loader doesn't resolve bundled libraries, use a small tcsh launcher:
+If your system loader doesn't resolve bundled libraries, use a small launcher. For example, for `tcsh`, I use:
 
-```
+```sh
 #!/bin/tcsh
 set KICAD_HOME="/path/to/kicad-portable"
 if (! $?LD_LIBRARY_PATH) setenv LD_LIBRARY_PATH ""
@@ -59,12 +59,14 @@ Save as `kicad.csh`, `chmod +x kicad.csh`, then run `./kicad.csh`.
 
 - `build.sh` compiles wxWidgets, OpenCascade, and ngspice from source and bundles all libs from `/opt/deps`.
 - KiCad is patched for relocatable data paths on Linux (see `common/paths.cpp`).
+- The final KiCad program has not been thoroughly tested for working correctly.
+  Expect tools to fail with exceptions or not load at all. 
 
 ## GitHub Actions
 
 A workflow is included to build and attach the tarball to a GitHub Release when you push a tag like `v9.0.7`.
 
 ## AI Usage
-Have in mind that AI agents were used partially in this project. Somethings may not be optimized, maybe even 
-completely wrong. 
+Have in mind that AI agents were used partially in this project. Some things may not be optimized, or may even 
+be completely wrong. 
 
