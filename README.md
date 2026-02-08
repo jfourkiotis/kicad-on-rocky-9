@@ -2,13 +2,12 @@
 
 [![build-kicad-portable](https://github.com/jfourkiotis/kicad-on-rocky-9/actions/workflows/build.yml/badge.svg)](https://github.com/jfourkiotis/kicad-on-rocky-9/actions/workflows/build.yml)
 
-This repo builds a **relocatable** KiCad 9.0.7 bundle inside a Rocky Linux 9 Docker container and outputs a tarball:
-
+This repo builds a **relocatable** KiCad 9.0.7 bundle, for when the official ways (e.g flatpak etc) to install it cannot work for any reason. In my case, I needed a portable installation for Rocky 9, so this is what dockerfile uses. The end result is a relocatable `tar.gz` file:
 ```
 out/kicad-portable-rocky9.tar.gz
 ```
 
-The tarball can be extracted anywhere (for example under a user's home directory) and run without system-wide installation.
+The tarball can be extracted anywhere (for example under a user's home directory) and run without system-wide installation. 
 
 ## Requirements
 
@@ -57,10 +56,11 @@ Save as `kicad.csh`, `chmod +x kicad.csh`, then run `./kicad.csh`.
 
 ## Notes
 
+- **This project was built because the official ways to install KiCad without building it from sources could not work in my case. If they work in your case, please use those**. 
 - `build.sh` compiles wxWidgets, OpenCascade, and ngspice from source and bundles all libs from `/opt/deps`.
 - KiCad is patched for relocatable data paths on Linux (see `common/paths.cpp`).
 - The final KiCad program has not been thoroughly tested for working correctly.
-  Expect tools to fail with exceptions or not load at all. 
+  Expect tools to fail with exceptions or not load at all.
 
 ## GitHub Actions
 
